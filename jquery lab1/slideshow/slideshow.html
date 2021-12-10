@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> slideshow</title>
+    <style>
+      body {
+        position: relative;
+      }
+
+      img {
+        width: 250px;
+        height: 250px;
+        margin: 5px;
+        background-color: white;
+      }
+
+      #mydiv {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0%;
+        bottom: 0px;
+        height: 560px;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-color: rgba(121, 77, 77, 0.5);
+        visibility: hidden;
+        padding: 50px 350px;
+      }
+
+      #divimg {
+        width: 450px;
+        height: 450px;
+      }
+
+      .arr {
+        width: 15px;
+        height: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <img id="image1" class="image" src="1.jpg" />
+    <img id="image2" class="image" src="meme.png" />
+    <img id="image3" class="image" src="3.png" />
+
+    <div id="mydiv">
+      <button><img class="arr" id="first" src="arrow-left.png" /></button>
+      <img id="divimg" />
+      <button><img class="arr" id="r" src="arrow-right.png" /></button>
+    </div>
+
+    <script src="jquery-3.5.1.js"></script>
+    <script>
+      var cur = 0;
+      var now = 2;
+      $(".image").click(function () {
+        $("#mydiv").css("visibility", "visible");
+        var img2 = document.getElementById("divimg");
+        img2.src = this.src;
+      });
+      $("#mydiv").click(function () {
+        $("#mydiv").css("visibility", "hidden");
+        event.stopPropagation();
+      });
+      $("#first").click(function () {
+        var img3 = document.getElementById("divimg");
+        var images = document.getElementsByClassName("image");
+        img3.src = images[cur].src;
+        if (cur === 0) {
+          cur = 2;
+        } else {
+          cur--;
+        }
+        event.stopPropagation();
+      });
+      $("#r").click(function () {
+        var img4 = document.getElementById("divimg");
+        var images = document.getElementsByClassName("image");
+        img4.src = images[cur].src;
+        if (cur === now) {
+          cur = 0;
+        } else {
+          cur++;
+        }
+        event.stopPropagation();
+      });
+    </script>
+  </body>
+</html>
